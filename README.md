@@ -156,9 +156,9 @@ pipeline = create_fashion_safety_pipeline(safety_mode="legacy_strict")
 
 | Input | Target Prompt | Output |
 |-------|---------------|--------|
-| Casual wear | "elegant evening dress" | [Link to example] |
-| Casual wear | "Business suit" | [Link to example] |
-| Casual wear | "Business Costume" |  [Link to example] |
+| Casual wear | "elegant evening dress" | ![Alt text](examples/Woman_Evening_Dress_comparison.png) |
+| Casual wear | "Business suit" | ![Alt text](examples/Man_Business_Suit_comparison.png)  |
+| Casual wear | "Business Costume" |  ![Alt text](examples/Woman_Business_Suit_comparison.png) |
 
 ## 🏢 Commercial Use & Support
 
