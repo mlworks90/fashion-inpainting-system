@@ -94,7 +94,7 @@ numpy>=1.21.0
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/fashion-inpainting-system.git
+git clone https://github.com/mlworks90/fashion-inpainting-system.git
 cd fashion-inpainting-system
 
 # Install dependencies
@@ -107,41 +107,23 @@ pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
 ### Basic Usage
 
 ```python
-from fashion_inpainting import FashionInpaintingSystem
-
-# Initialize system
-system = FashionInpaintingSystem(
-    device='cuda',
-    safety_checker=True  # Enable content filtering
-)
+from fashion_safety_checker import create_fashion_safety_pipeline
+pipeline = create_fashion_safety_pipeline()
 
 # Transform outfit
-result = system.transform_outfit(
-    source_image="person_in_casual_wear.jpg",
-    target_prompt="elegant red evening dress",
-    output_path="transformed_result.jpg"
-)
-```
-
-### Advanced Usage with Custom Checkpoints
-
-```python
-# Use custom fashion checkpoint
-system = FashionInpaintingSystem(
-    device='cuda',
-    custom_checkpoint="path/to/fashion_model.safetensors",
-    safety_checker=True
+result = pipeline.safe_fashion_transformation(
+    source_image_path="person_in_some_outfit.png",
+    checkpoint_path="desired_outfit_style_checkpoint.safetensors",
+    outfit_prompt="another_ouitfit",
+    output_path="same_person_another_ouitfit.jpg",
+    face_scale=0.90     # manmual face to body ratio adjustment 
 )
 
-# Generate with specific parameters
-result = system.transform_outfit(
-    source_image="input.jpg",
-    target_prompt="professional business suit",
-    guidance_scale=12.0,
-    num_inference_steps=50,
-    preserve_face=True,
-    output_path="business_suit_result.jpg"
-)
+if result['success']:
+    print("✅ Fashion transformation completed")
+else:    
+    print(f"Blocking reason: {result['blocking_reason']}")
+    print(f"User message: {result['user_message']}")
 ```
 
 ## 📊 Performance & Quality
@@ -157,24 +139,16 @@ result = system.transform_outfit(
 ### Safety Settings
 
 ```python
-safety_config = {
-    'enable_content_filter': True,
-    'face_preservation_threshold': 0.85,
-    'pose_validation_strict': True,
-    'quality_threshold': 0.75
-}
+pipeline = create_fashion_safety_pipeline(safety_mode="legacy_strict") 
+ # legacy_strict - highest safety restrictions
+ # fashion_strict - conservative outfits only
+ # fashion_moderate - default level. Suitable for most garment types except some swimwear.
+ # fashion_permissive - most permissive mode. Be aware of inappropriate outputs possibility!
+            
+
 ```
 
-### Model Settings
 
-```python
-generation_config = {
-    'num_inference_steps': 50,
-    'guidance_scale': 12.0,
-    'strength': 0.8,
-    'controlnet_conditioning_scale': 1.0
-}
-```
 
 ## 🧪 Examples
 
@@ -182,9 +156,9 @@ generation_config = {
 
 | Input | Target Prompt | Output |
 |-------|---------------|--------|
-| Casual wear | "elegant evening gown" | [Link to example] |
-| Business attire | "summer beach dress" | [Link to example] |
-| Formal suit | "casual streetwear" | [Link to example] |
+| Casual wear | "elegant evening dress" | [Link to example] |
+| Casual wear | "Business suit" | [Link to example] |
+| Casual wear | "Business Costume" |  [Link to example] |
 
 ## 🏢 Commercial Use & Support
 
@@ -204,7 +178,7 @@ For commercial deployments, we offer:
 - **Priority support** and SLA guarantees
 - **Custom safety filtering** for brand-specific requirements
 
-Contact: [your-email@domain.com](mailto:your-email@domain.com)
+Contact: [mlworks90@gmail.com](mailto:mlworks90@gmail.com)
 
 ## 📚 Documentation
 
@@ -222,7 +196,7 @@ We welcome contributions! Please read our [Contributing Guidelines](CONTRIBUTING
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/fashion-inpainting-system.git
+git clone https://github.com/mlworks90/fashion-inpainting-system.git
 cd fashion-inpainting-system
 
 # Install in development mode
@@ -254,10 +228,10 @@ Licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) for detai
 
 ## 📞 Support & Contact
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/fashion-inpainting-system/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/fashion-inpainting-system/discussions)
-- **Commercial Inquiries**: [your-email@domain.com](mailto:your-email@domain.com)
-- **Documentation**: [Project Wiki](https://github.com/yourusername/fashion-inpainting-system/wiki)
+- **Issues**: [GitHub Issues](https://github.com/mlworks90/fashion-inpainting-system/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/mlworks90/fashion-inpainting-system/discussions)
+- **Commercial Inquiries**: [your-email@domain.com](mailto:mlworks90@gmailo.com)
+- **Documentation**: [Project Wiki](https://github.com/mlworks90/fashion-inpainting-system/wiki)
 
 ---
 
